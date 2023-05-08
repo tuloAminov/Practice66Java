@@ -12,7 +12,7 @@
 <h1>Список игроков</h1>
 <div th:each="player : ${players}" style="display: flex; gap: 20px; align-items: center;">
     <p th:text="${player.toString()}"></p>
-    <a th:href="@{update/{id}(id=${player.id})}">Ре1дактировать</a>
+    <a th:href="@{update/{id}(id=${player.id})}">Редактировать</a>
 </div> <br><br><br><br>
 
 <span style="font-size: x-large; ">
