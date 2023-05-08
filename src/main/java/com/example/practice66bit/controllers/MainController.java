@@ -5,9 +5,7 @@ import com.example.practice66bit.services.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,7 +21,7 @@ public class MainController {
 
     @ModelAttribute("players")
     public List<Player> allPlayers() {
-        return playerService.getAllPlayers();
+        return playerService.findAll();
     }
 
     @ModelAttribute("teams")
@@ -32,20 +30,35 @@ public class MainController {
     }
 
     @GetMapping("/add")
-    public String addPlayer(Model model) {
+    public String addPlayerPage(Model model) {
         model.addAttribute("player", new Player());
         return "addPlayer";
     }
 
+    @PostMapping("/add")
+    public String addPlayer(Player player, Model model) {
+        model.addAttribute("player", player);
+        playerService.save(player);
+        return "redirect:/all";
+    }
+
     @GetMapping("/all")
-    public String getAllPlayers() {
+    public String getAllPlayers(Player player, Model model) {
+        model.addAttribute("playerToUpdate", player);
         return "allPlayers";
     }
 
-    @PostMapping("/add")
-    public String playerPostAdd(Player player, Model model) {
-        model.addAttribute("player", player);
-        playerService.addPlayer(player);
+    @GetMapping("/update/{id}")
+    public String updateForm(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("playerToUpdate", playerService.findById(id));
+        return "updatePlayer";
+    }
+
+    @PostMapping("/update/{id}")
+    public String update(@PathVariable("id") Long id, @ModelAttribute("playerToUpdate") Player player) {
+        player.setId(id);
+        player.setCountry(playerService.findById(id).getCountry());
+        playerService.save(player);
         return "redirect:/all";
     }
 }

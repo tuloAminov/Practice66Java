@@ -73,4 +73,10 @@ public class Player {
         this.country = country;
     }
 
+    @Override
+    public String toString() {
+        return id + ". " + name + " " + surname + ", " +
+                gender + ", " + birthDate + ", " +
+                team + ", " + country;
+    }
 }
