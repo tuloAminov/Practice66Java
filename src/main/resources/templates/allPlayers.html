@@ -9,27 +9,14 @@
     <title>Players</title>
 </head>
 <body>
-<header class = "header">
-    <div class="container">
-        <div class="header-inner">
-            <br><a class="menu-link" href="/add">Добавить игрока</a>
-        </div>
-    </div>
-</header>
-<div class="container">
-    <div class = "head-block"></div>
-    <div class = "line"></div>
-    <div class="name"></div>
+<h1>Список игроков</h1>
+<div th:each="player : ${players}" style="display: flex; gap: 20px; align-items: center;">
+    <p th:text="${player.toString()}"></p>
+    <a th:href="@{update/{id}(id=${player.id})}">Ре1дактировать</a>
+</div> <br><br><br><br>
 
-    <div class="job-title">
-        Список игроков
-    </div>
-
-    <br><br><br><br><br><br><br>
-    <div class="e-info1" th:each="player : ${players}">
-        <p th:text="${player.toString()}"></p>
-    </div>
-
-</div>
+<span style="font-size: x-large; ">
+    <a href="/add">Добавить нового игрока</a>
+</span>
 </body>
 </html>

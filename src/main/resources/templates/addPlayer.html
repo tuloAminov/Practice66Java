@@ -11,48 +11,40 @@
 <body>
 <br><br>
 <div class="container">
-    <div class = "head-block"></div>
-    <div class = "line"></div>
-    <div class="name"></div>
-
     <h1>Добаление игрока</h1>
     <form method="post" autocomplete="off" th:action="@{/add}" th:object="${player}">
         <table>
             <tr>
                 <td>
-                    <input type="text" placeholder="имя" th:field="*{name}">
-                    <p th:if="${#fields.hasErrors('name')}">field value cannot be empty</p>
+                    <input type="text" placeholder="имя" th:field="*{name}" id="name">
                 </td>
                 <td>
-                    <input type="text" placeholder="фамилия" th:field="*{surname}">
-                    <p th:if="${#fields.hasErrors('surname')}">field value cannot be empty</p>
+                    <input type="text" placeholder="фамилия" th:field="*{surname}" id="surname">
                 </td>
                 <td>
-                    <select class="form-control" th:field="*{gender}">
-                        <option value="choose">--Пол игрока--</option>
-                        <option value="man">муж.</option>
-                        <option value="woman">жен.</option>
+                    <select class="form-control" th:field="*{gender}" id="gender">
+                        <option value=" ">--Пол игрока--</option>
+                        <option value="мужской">муж.</option>
+                        <option value="женский">жен.</option>
                     </select>
                 </td>
                 <td>
-                    <input type="date" value="1995-01-01" min="1950-01-01" max="2010-12-31" th:field="*{dateOfBirth}">
-                    <p th:if="${#fields.hasErrors('dateOfBirth')}">field value cannot be empty</p>
+                    <input type="date" value="1990-01-01" min="1950-01-01" max="2010-12-31" th:field="*{dateOfBirth}" id="dateOfBirth">
                 </td>
                 <td>
-                    <input type="text" placeholder="команда" list="teams" th:field="*{team}">
+                    <input type="text" placeholder="команда" list="teams" th:field="*{team}" id="team">
                     <datalist id="teams">
                         <div th:each="team : ${teams}">
                             <option th:text="${team}">team</option>
                         </div>>
                     </datalist>
-                    <p th:if="${#fields.hasErrors('team')}">field value cannot be empty</p>
                 </td>
                 <td>
-                    <select class="form-control" th:field="*{country}">
-                        <option value="choose">--Страна--</option>
-                        <option value="Russia">Россия</option>
-                        <option value="USA">США</option>
-                        <option value="Italy">Италия</option>
+                    <select class="form-control" th:field="*{country}" id="country">
+                        <option value=" ">--Страна--</option>
+                        <option value="Россия">Россия</option>
+                        <option value="США">США</option>
+                        <option value="Италия">Италия</option>
                     </select>
                 </td>
                 <td>
@@ -62,11 +54,10 @@
         </table>
     </form>
 </div> <br><br><br><br>
-<div class="container">
-    <h1>Список всех игроков можно посмотреть тут:</h1>
-    <font size="6">
-        <a class="menu-link" href="/all">Все игроки</a>
-    </font>
-</div>
+
+<h1>Список всех игроков можно посмотреть тут:</h1>
+<font size="6">
+    <a class="menu-link" href="/all">Все игроки</a>
+</font>
 </body>
 </html>
