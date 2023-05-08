@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Player</title>
+</head>
+<body><h1>Изменение игрока</h1>
+<form method="post" th:action="@{/update/{id}(id=${playerToUpdate.getId()})}" th:object="${playerToUpdate}">
+    <table>
+        <tr>
+            <td>
+                <input type="text" placeholder="имя" th:field="*{name}">
+            </td>
+            <td>
+                <input type="text" placeholder="фамилия" th:field="*{surname}">
+            </td>
+            <td>
+                <select class="form-control" th:field="*{gender}">
+                    <option value=" ">--Пол игрока--</option>
+                    <option value="мужской">муж.</option>
+                    <option value="женский">жен.</option>
+                </select>
+            </td>
+            <td>
+                <input type="date" value="1995-01-01" min="1950-01-01" max="2010-12-31" th:field="*{dateOfBirth}">
+            </td>
+            <td>
+                <input type="text" placeholder="команда" list="teams" th:field="*{team}">
+                <datalist id="teams">
+                    <div th:each="team : ${teams}">
+                        <option th:text="${team}">team</option>
+                    </div>>
+                </datalist>
+            </td>
+            <td>
+                <select class="form-control" disabled th:field="*{country}">
+                    <option value="" th:text="${playerToUpdate.getCountry()}">--Страна--</option>
+                </select>
+            </td>
+            <td>
+                <input type="submit" value="Изменить">
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
